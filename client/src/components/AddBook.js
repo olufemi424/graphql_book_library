@@ -1,17 +1,24 @@
 import React, { Component } from "react";
-import { gql } from "apollo-boost";
 import { graphql } from "react-apollo";
-
-const getAuthorsQuery = gql`
-  {
-    authors {
-      name
-      id
-    }
-  }
-`;
+import { getAuthorsQuery } from "../queries/queries";
 
 class AddBook extends Component {
+  state = {
+    name: "",
+    genre: ""
+  };
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(this.state);
+  };
+
   displayAuthors = () => {
     const data = this.props.data;
 
@@ -29,18 +36,18 @@ class AddBook extends Component {
   };
   render() {
     return (
-      <form id="add-book">
+      <form id="add-book" onSubmit={this.handleSubmit}>
         <div className="field">
           <label>Book name:</label>
-          <input type="text" />
+          <input type="text" name="name" onChange={this.handleChange} />
         </div>
         <div className="field">
           <label>Genre:</label>
-          <input type="text" />
+          <input type="text" name="genre" onChange={this.handleChange} />
         </div>
         <div className="field">
           <label>Author:</label>
-          <select>
+          <select name="author" onChange={this.handleChange}>
             <option>Select author</option>
             {this.displayAuthors()}
           </select>
