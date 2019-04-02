@@ -5,7 +5,8 @@ import { getAuthorsQuery, addBookMutation } from "../queries/queries";
 class AddBook extends Component {
   state = {
     name: "",
-    genre: ""
+    genre: "",
+    authorId: ""
   };
 
   handleChange = e => {
@@ -16,7 +17,13 @@ class AddBook extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.addBookMutation();
+    this.props.addBookMutation({
+      variables: {
+        name: this.state.name,
+        genre: this.state.genre,
+        authorId: this.state.authorId
+      }
+    });
   };
 
   displayAuthors = () => {
@@ -47,7 +54,7 @@ class AddBook extends Component {
         </div>
         <div className="field">
           <label>Author:</label>
-          <select name="author" onChange={this.handleChange}>
+          <select name="authorId" onChange={this.handleChange}>
             <option>Select author</option>
             {this.displayAuthors()}
           </select>
