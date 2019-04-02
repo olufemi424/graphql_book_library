@@ -1,7 +1,7 @@
 const graphql = require("graphql");
 const _ = require("lodash");
-const mongoose = require("mongoose");
 
+//Schema
 const Book = require("../models/book");
 const Author = require("../models/author");
 
@@ -17,13 +17,6 @@ const {
 } = graphql;
 
 //connect to mongodb
-mongoose
-  .connect(
-    "mongodb+srv://olufemi:Mylove123@cluster0-qzgx0.mongodb.net/test?retryWrites=true",
-    { useNewUrlParser: true, useCreateIndex: true }
-  )
-  .then(() => console.log("MongoDb Connected")) //promise return
-  .catch(err => console.log("Not Connected to Database ERROR! ", err));
 
 //book query with defined fields
 const BookType = new GraphQLObjectType({
